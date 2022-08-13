@@ -27,7 +27,7 @@ func TestHTTPServer(t *testing.T) {
 	}{
 		"Health endpoint is up": {
 			request:      newReq(http.MethodGet, ts.URL+"/health", nil),
-			expectedBody: "{\"Ok\":true}",
+			expectedBody: "{\"Ok\":true}", // remove and check status different to 404 for make the test more generic 
 		},
 	}
 
