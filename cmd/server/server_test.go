@@ -4,6 +4,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -26,7 +27,7 @@ func TestHTTPServer (t *testing.T) {
 	}{
 		"Health endpoint is up": {
 			request: newReq(http.MethodGet, ts.URL + "/health", nil),
-			expectedBody: "Ok",
+			expectedBody: "{\"Ok\":true}",
 		},
 	}
 
@@ -42,8 +43,9 @@ func TestHTTPServer (t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if string(b) != tc.expectedBody {
-				t.Errorf("want '%s', got '%s'", tc.expectedBody, string(b))
+			str := strings.TrimSpace(string(b))
+			if str != tc.expectedBody {
+				t.Errorf("want '%s', got '%s'", tc.expectedBody, str)
 			}
 		})
 	}
