@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-func TestHTTPServer (t *testing.T) {
+func TestHTTPServer(t *testing.T) {
 
 	ts := httptest.NewServer(NewServer().Handler)
 	defer ts.Close()
@@ -19,22 +19,22 @@ func TestHTTPServer (t *testing.T) {
 			t.Fatal(err)
 		}
 		return r
-	  }
+	}
 
 	testCases := map[string]struct {
-		request *http.Request
+		request      *http.Request
 		expectedBody string
 	}{
 		"Health endpoint is up": {
-			request: newReq(http.MethodGet, ts.URL + "/health", nil),
+			request:      newReq(http.MethodGet, ts.URL+"/health", nil),
 			expectedBody: "{\"Ok\":true}",
 		},
 	}
 
 	for name, tc := range testCases {
-		t.Run(name, func (t *testing.T) {
+		t.Run(name, func(t *testing.T) {
 			resp, err := http.DefaultClient.Do(tc.request)
-			
+
 			if err != nil {
 				t.Fatal(err)
 			}
