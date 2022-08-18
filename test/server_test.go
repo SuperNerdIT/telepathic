@@ -17,7 +17,7 @@ type serverCtxKey struct{}
 
 type statusCodeCtxKey struct {}
 
-func thisReturnsCode(ctx context.Context, expectedCode int) (error) {
+func thisReturnsStatusCode(ctx context.Context, expectedCode int) (error) {
 	code, ok := ctx.Value(statusCodeCtxKey{}).(int)
 	if !ok {
 		return  errors.New("Cannot get status code of context")
@@ -59,5 +59,5 @@ func iCallHealthEndpoint(ctx context.Context) (context.Context ,error) {
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^the main server$`, theMainServer)
 	ctx.Step(`^I call \/health endpoint$`, iCallHealthEndpoint)
-	ctx.Step(`^this returns (\d+) code$`, thisReturnsCode)
+	ctx.Step(`^this returns (\d+) code$`, thisReturnsStatusCode)
 }
