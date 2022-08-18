@@ -6,11 +6,15 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	"github.com/SuperNerdIT/telepathic/cmd/server/configs"
 )
 
 func TestHTTPServer(t *testing.T) {
+	cfg := configs.MakeConfigs()
+	handler := NewServer(cfg).Handler
 
-	ts := httptest.NewServer(NewServer().Handler)
+	ts := httptest.NewServer(handler)
 	defer ts.Close()
 
 	newReq := func(method, url string, body io.Reader) *http.Request {
@@ -27,7 +31,7 @@ func TestHTTPServer(t *testing.T) {
 	}{
 		"Health endpoint is up": {
 			request:      newReq(http.MethodGet, ts.URL+"/health", nil),
-			expectedBody: "{\"Ok\":true}", // remove and check status different to 404 for make the test more generic 
+			expectedBody: "{\"Ok\":true}", // remove and check status different to 404 for make the test more generic
 		},
 	}
 
