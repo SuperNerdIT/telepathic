@@ -3,5 +3,9 @@ package server
 import "log"
 
 func StartServer() {
-	log.Fatal(NewServer().ListenAndServe())
+	srv := NewServer()
+	err := srv.ListenAndServe()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
