@@ -1,7 +1,6 @@
 version: 2 
 jobs: # basic units of work in a run
-  unit-tests: 
-  
+  unit-tests:   
     docker:
       - image:  cimg/go:1.18
 
