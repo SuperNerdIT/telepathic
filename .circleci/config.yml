@@ -55,7 +55,7 @@ workflows:
   testing:
     jobs:
       - unit-tests
-      - for-main-test:
+      - godog-tests:
           requires:
             - unit-tests
           filters:
