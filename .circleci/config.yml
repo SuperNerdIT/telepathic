@@ -1,20 +1,19 @@
 version: 2 
 jobs: # basic units of work in a run
-  unit-tests: # runs not using Workflows must have a `build` job as entry point
-  
-    docker: # run the steps with Docker
-      - image:  cimg/go:1.19.0
+  unit-tests:   
+    docker:
+      - image:  cimg/go:1.18
 
-    environment: # environment variables for the build itself
+    environment:
       TEST_RESULTS: /tmp/test-results # path to where test results will be saved
     
     parallelism: 2
 
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
-      - run: mkdir -p $TEST_RESULTS # create the test results directory
+    steps:
+      - checkout
+      - run: mkdir -p $TEST_RESULTS
 
-      - restore_cache: # restores saved cache if no changes are detected since last run
+      - restore_cache:
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
 
@@ -32,25 +31,33 @@ jobs: # basic units of work in a run
 
       - store_test_results: # upload test results for display in Test Summary
           path: /tmp/test-results
-  for-main-test:
+  
+  godog-tests:
     docker:
-      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+      - image: cimg/go:1.18
+
     steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world" # run the `echo` command
+      - checkout
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+      - run:
+          name: install godog
+          command: go install github.com/cucumber/godog/cmd/godog@latest
+      
+      - run:
+          name: run godog tests
+          command: cd test && godog run
+
 
 workflows:
   version: 2
-  for-prs:
+  testing:
     jobs:
-      - unit-tests:
-          filters:
-            branches:
-              ignore:
-                - main
-  for-main:
-    jobs:
-      - for-main-test:
+      - unit-tests
+      - godog-tests:
+          requires:
+            - unit-tests
           filters:
             branches:
               only:
