@@ -1,6 +1,7 @@
-version: 2 # use CircleCI 2.0
+version: 2 
 jobs: # basic units of work in a run
   unit-tests: # runs not using Workflows must have a `build` job as entry point
+  
     docker: # run the steps with Docker
       - image:  cimg/go:1.19.0
 
@@ -31,8 +32,27 @@ jobs: # basic units of work in a run
 
       - store_test_results: # upload test results for display in Test Summary
           path: /tmp/test-results
+  for-main-test:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
 workflows:
   version: 2
-  build:
+  for-prs:
     jobs:
       - unit-tests
+          filters:
+            branches:
+              ignore:
+                - main
+  for-main:
+    jobs:
+      - for-main-test:
+          filters:
+            branches:
+              only:
+                - main
+
