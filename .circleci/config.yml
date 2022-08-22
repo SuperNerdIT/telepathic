@@ -43,7 +43,7 @@ workflows:
   version: 2
   for-prs:
     jobs:
-      - unit-tests
+      - unit-tests:
           filters:
             branches:
               ignore:
