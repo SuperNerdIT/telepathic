@@ -42,17 +42,20 @@ jobs: # basic units of work in a run
 workflows:
   version: 2
   for-prs:
+    filters:
+      branches:
+        only:
+          - main
     jobs:
-      - unit-tests:
-          filters:
-            branches:
-              ignore:
-                - main
+      - unit-tests
+      
   for-main:
+    filters:
+      branches:
+        only:
+          - main
     jobs:
-      - for-main-test:
-          filters:
-            branches:
-              only:
-                - main
+      - for-main-test
+      - unit-tests
+
 
