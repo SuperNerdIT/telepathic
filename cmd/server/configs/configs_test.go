@@ -38,7 +38,6 @@ func TestGetConfigFromFile(t *testing.T) {
 
 }
 
-
 func TestSetAConfigFile(t *testing.T) {
 	content := `
 server:
@@ -50,13 +49,13 @@ server:
 	if err != nil {
 		panic("Error creating test config file")
 	}
-    
+
 	_, err = f.WriteString(content)
-    if err != nil {
-        f.Close()
-        return
-    }
-	cleanup := func () {
+	if err != nil {
+		f.Close()
+		return
+	}
+	cleanup := func() {
 		os.Remove("./config.yml")
 	}
 	defer cleanup()
@@ -67,8 +66,7 @@ server:
 	got := MakeConfigs().Port
 
 	if want != got {
-		t.Errorf("want '%s', got '%s'", want, got )
+		t.Errorf("want '%s', got '%s'", want, got)
 	}
 
-} 
-
+}
