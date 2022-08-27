@@ -53,6 +53,7 @@ server:
 	_, err = f.WriteString(content)
 	if err != nil {
 		f.Close()
+		t.Fatal("Error creating config.yml file for test")
 		return
 	}
 	cleanup := func() {
