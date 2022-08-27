@@ -61,5 +61,5 @@ func iCallHealthEndpoint(ctx context.Context) (context.Context, error) {
 func InitializeScenario(ctx *godog.ScenarioContext) {
 	ctx.Step(`^the main server$`, theMainServer)
 	ctx.Step(`^I call \/health endpoint$`, iCallHealthEndpoint)
-	ctx.Step(`^this returns (\d+) code$`, thisReturnsStatusCode)
+	ctx.Step(`^this returns (\d+) status code$`, thisReturnsStatusCode)
 }
