@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"golang.go",
+		"windmilleng.vscode-go-autotest",
+		"msyrus.go-doc",
+		"aleksandra.go-group-imports",
+		"eamodio.gitlens",
+		"alexkrechik.cucumberautocomplete",
+		"streetsidesoftware.code-spell-checker"
+	]
+}
