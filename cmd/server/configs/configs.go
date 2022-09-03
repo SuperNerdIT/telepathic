@@ -49,12 +49,12 @@ func MakeConfigs() *Configs {
 	// so this could be dynamic
 
 	return &Configs{
-		Port: readFromFile("server.addr.port"),
-		Host: readFromFile("server.addr.host"),
+		Port: getConfig("server.addr.port"),
+		Host: getConfig("server.addr.host"),
 	}
 }
 
-func readFromFile(key string) string {
+func getConfig(key string) string {
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Println(err)
 		panic("Error reading config file")

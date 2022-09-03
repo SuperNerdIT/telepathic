@@ -27,7 +27,7 @@ func TestGetConfigFromFile(t *testing.T) {
 		tf := func(t *testing.T) {
 			want := tc.expected
 
-			got := readFromFile(tc.key)
+			got := getConfig(tc.key)
 
 			if got != want {
 				t.Errorf("want '%s', got '%s'", want, got)
