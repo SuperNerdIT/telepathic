@@ -1,0 +1,5 @@
+server:
+  addr:
+    port: 3000
+    host: localhost
+ 
