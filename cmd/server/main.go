@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/SuperNerdIT/telepathic/cmd/server/configs"
-	"github.com/SuperNerdIT/telepathic/cmd/server/server"
+	"github.com/SuperNerdIT/telepathic/configs"
+	"github.com/SuperNerdIT/telepathic/server"
 )
 
 func main() {

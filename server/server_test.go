@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SuperNerdIT/telepathic/cmd/server/configs"
+	"github.com/SuperNerdIT/telepathic/configs"
 )
 
 func TestHTTPServer(t *testing.T) {
