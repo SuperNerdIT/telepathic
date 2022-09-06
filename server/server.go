@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/SuperNerdIT/telepathic/cmd/server/configs"
+	"github.com/SuperNerdIT/telepathic/configs"
 )
 
 // this funtion could receive the configs

@@ -10,8 +10,8 @@ import (
 
 	"github.com/cucumber/godog"
 
-	"github.com/SuperNerdIT/telepathic/cmd/server/configs"
-	"github.com/SuperNerdIT/telepathic/cmd/server/server"
+	"github.com/SuperNerdIT/telepathic/configs"
+	"github.com/SuperNerdIT/telepathic/server"
 )
 
 type serverCtxKey struct{}
